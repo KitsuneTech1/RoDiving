@@ -15,6 +15,15 @@ shopFrame.BorderSizePixel = 0
 shopFrame.Visible = false -- Hidden until prompt is triggered
 shopFrame.Parent = screenGui
 
+local shopCorner = Instance.new("UICorner")
+shopCorner.CornerRadius = UDim.new(0, 16)
+shopCorner.Parent = shopFrame
+
+local shopStroke = Instance.new("UIStroke")
+shopStroke.Color = Color3.fromRGB(0, 200, 255)
+shopStroke.Thickness = 2
+shopStroke.Parent = shopFrame
+
 local OpenShopEvent = ReplicatedStorage:WaitForChild("OpenShopEvent")
 OpenShopEvent.OnClientEvent:Connect(function()
     shopFrame.Visible = true
@@ -30,6 +39,7 @@ title.TextSize = 24
 title.Parent = shopFrame
 
 -- Gacha Button
+-- Gacha Button
 local rollButton = Instance.new("TextButton")
 rollButton.Size = UDim2.new(0.8, 0, 0, 60)
 rollButton.Position = UDim2.new(0.1, 0, 0.8, 0)
@@ -39,6 +49,10 @@ rollButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 rollButton.Font = Enum.Font.GothamBold
 rollButton.TextSize = 20
 rollButton.Parent = shopFrame
+
+local rollCorner = Instance.new("UICorner")
+rollCorner.CornerRadius = UDim.new(0, 12)
+rollCorner.Parent = rollButton
 
 -- Notification Label
 local notifLabel = Instance.new("TextLabel")
@@ -95,6 +109,7 @@ rollButton.MouseButton1Click:Connect(function()
 end)
 
 -- Close Button
+-- Close Button
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
 closeButton.Position = UDim2.new(1, -35, 0, 10)
@@ -104,6 +119,10 @@ closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.Font = Enum.Font.GothamBold
 closeButton.TextSize = 18
 closeButton.Parent = shopFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = closeButton
 
 closeButton.MouseButton1Click:Connect(function()
     shopFrame.Visible = false

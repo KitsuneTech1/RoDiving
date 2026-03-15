@@ -15,6 +15,15 @@ upgradeFrame.BorderSizePixel = 0
 upgradeFrame.Visible = false
 upgradeFrame.Parent = screenGui
 
+local upgradeCorner = Instance.new("UICorner")
+upgradeCorner.CornerRadius = UDim.new(0, 16)
+upgradeCorner.Parent = upgradeFrame
+
+local upgradeStroke = Instance.new("UIStroke")
+upgradeStroke.Color = Color3.fromRGB(0, 255, 150)
+upgradeStroke.Thickness = 2
+upgradeStroke.Parent = upgradeFrame
+
 local title = Instance.new("TextLabel")
 title.Text = "Stat Upgrades"
 title.Size = UDim2.new(1, 0, 0, 50)
@@ -33,6 +42,10 @@ closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.Font = Enum.Font.GothamBold
 closeButton.TextSize = 18
 closeButton.Parent = upgradeFrame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = closeButton
 
 closeButton.MouseButton1Click:Connect(function()
     upgradeFrame.Visible = false
@@ -66,6 +79,10 @@ local function createStatRow(statName, displayName, yPos)
     buyBtn.Font = Enum.Font.GothamBold
     buyBtn.TextSize = 16
     buyBtn.Parent = row
+    
+    local buyCorner = Instance.new("UICorner")
+    buyCorner.CornerRadius = UDim.new(0, 8)
+    buyCorner.Parent = buyBtn
     
     local errorLabel = Instance.new("TextLabel")
     errorLabel.Text = ""
