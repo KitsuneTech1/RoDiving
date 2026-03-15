@@ -67,9 +67,17 @@ function ArtifactManager.SpawnArtifact(position)
     local InventoryManager = require(script.Parent:WaitForChild("InventoryManager"))
 
     prompt.Triggered:Connect(function(player)
+        local valueMultiplier = 1
+        local luckLevelValue = player:FindFirstChild("LuckLevel")
+        if luckLevelValue then
+            valueMultiplier = 1 + (luckLevelValue.Value - 1) * 0.5 -- +50% artifact value per Luck level
+        end
+        
+        local finalValue = math.floor(artifactType.Value * valueMultiplier)
+
         local success = InventoryManager.AddItem(player, InventoryManager.ItemTypes.Artifact, {
             Name = artifactType.Name,
-            Value = artifactType.Value,
+            Value = finalValue,
             Rarity = artifactType.Rarity
         })
         

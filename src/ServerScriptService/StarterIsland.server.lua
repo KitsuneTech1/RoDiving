@@ -69,3 +69,48 @@ OpenShopEvent.Parent = ReplicatedStorage
 shopPrompt.Triggered:Connect(function(player)
     OpenShopEvent:FireClient(player)
 end)
+
+-- Create a Physical Upgrade Booth
+local upgradeBooth = Instance.new("Part")
+upgradeBooth.Name = "UpgradeShopBooth"
+upgradeBooth.Size = Vector3.new(20, 10, 10)
+upgradeBooth.Position = Vector3.new(30, 10, -30) -- Placed next to the other shop
+upgradeBooth.Anchored = true
+upgradeBooth.Color = Color3.fromRGB(100, 150, 150) -- Slate color
+upgradeBooth.Material = Enum.Material.Slate
+upgradeBooth.Parent = Workspace
+
+local upgradeSign = Instance.new("Part")
+upgradeSign.Name = "UpgradeSign"
+upgradeSign.Size = Vector3.new(20, 5, 2)
+upgradeSign.Position = Vector3.new(30, 15, -30)
+upgradeSign.Anchored = true
+upgradeSign.Color = Color3.fromRGB(50, 50, 50)
+upgradeSign.Parent = Workspace
+
+local upgradeGui = Instance.new("SurfaceGui")
+upgradeGui.Face = Enum.NormalId.Front
+upgradeGui.Parent = upgradeSign
+
+local upgradeLabel = Instance.new("TextLabel")
+upgradeLabel.Size = UDim2.new(1, 0, 1, 0)
+upgradeLabel.BackgroundTransparency = 1
+upgradeLabel.Text = "Stat Upgrades"
+upgradeLabel.TextColor3 = Color3.fromRGB(0, 255, 150)
+upgradeLabel.TextScaled = true
+upgradeLabel.Font = Enum.Font.GothamBlack
+upgradeLabel.Parent = upgradeGui
+
+local upgradePrompt = Instance.new("ProximityPrompt")
+upgradePrompt.ActionText = "Open Shop"
+upgradePrompt.ObjectText = "Upgrades"
+upgradePrompt.HoldDuration = 0
+upgradePrompt.Parent = upgradeBooth
+
+local OpenUpgradeShopEvent = Instance.new("RemoteEvent")
+OpenUpgradeShopEvent.Name = "OpenUpgradeShopEvent"
+OpenUpgradeShopEvent.Parent = ReplicatedStorage
+
+upgradePrompt.Triggered:Connect(function(player)
+    OpenUpgradeShopEvent:FireClient(player)
+end)

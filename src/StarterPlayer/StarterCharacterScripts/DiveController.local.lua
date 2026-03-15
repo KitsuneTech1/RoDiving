@@ -2,6 +2,7 @@ local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
+local player = Players.LocalPlayer
 local character = script.Parent
 local humanoid = character:WaitForChild("Humanoid")
 local rootPart = character:WaitForChild("HumanoidRootPart")
@@ -44,11 +45,22 @@ diveVelocity.Parent = rootPart
 diveVelocity.Enabled = false
 
 local isDiving = false
-local SWIM_SPEED = 15
-local DIVE_SPEED = 10
+local BASE_SWIM_SPEED = 15
+local BASE_DIVE_SPEED = 10
 
 -- Input Handling for 3D Movement
 local function handleSwimming(deltaTime)
+    -- In a real game, this would sync from a RemoteFunction on spawn, but for 
+    -- rapid prototyping we can just pull a Value object if it exists or default it.
+    local speedMultiplier = 1
+    local speedLevelValue = player:FindFirstChild("SwimSpeedLevel")
+    if speedLevelValue then
+        speedMultiplier = 1 + (speedLevelValue.Value - 1) * 0.2 -- +20% speed per level
+    end
+
+    local SWIM_SPEED = BASE_SWIM_SPEED * speedMultiplier
+    local DIVE_SPEED = BASE_DIVE_SPEED * speedMultiplier
+
     local depth = rootPart.Position.Y
     local isUnderwater = depth < 0
     
