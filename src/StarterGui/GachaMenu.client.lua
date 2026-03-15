@@ -12,7 +12,13 @@ shopFrame.Size = UDim2.new(0, 300, 0, 400)
 shopFrame.Position = UDim2.new(1, -320, 0.5, -200)
 shopFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
 shopFrame.BorderSizePixel = 0
+shopFrame.Visible = false -- Hidden until prompt is triggered
 shopFrame.Parent = screenGui
+
+local OpenShopEvent = ReplicatedStorage:WaitForChild("OpenShopEvent")
+OpenShopEvent.OnClientEvent:Connect(function()
+    shopFrame.Visible = true
+end)
 
 local title = Instance.new("TextLabel")
 title.Text = "Deep Sea Gacha"
@@ -85,4 +91,20 @@ rollButton.MouseButton1Click:Connect(function()
     end
     
     isRolling = false
+    isRolling = false
+end)
+
+-- Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 30, 0, 30)
+closeButton.Position = UDim2.new(1, -35, 0, 10)
+closeButton.Text = "X"
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 18
+closeButton.Parent = shopFrame
+
+closeButton.MouseButton1Click:Connect(function()
+    shopFrame.Visible = false
 end)
